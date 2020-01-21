@@ -1,88 +1,64 @@
 function ConversionPart2() {
     //
-    var SignedDecimalInt = parseInt(document.getElementById("2_SignedInt").value);
-    var stringNum = SignedDecimalInt.toString();
-    var t = SignedDecimalInt.toString().split('');
-         var value = [];
-         i = 0;
-         if (t[0] == "-")
-         {
-           console.log(true);
-           stringNum = stringNum.replace(/-/g,'');
-           while (stringNum != 0)
-           {
-             value[i] = parseInt(stringNum) % parseInt(2);
+    var SignedDecimalInt = document.getElementById("2_SignedInt").value;
+    var positive = true;
+    if (SignedDecimalInt.charAt(0) == "-") {
+    positive = false;
+    }
 
-             stringNum = parseInt(stringNum)/parseInt(2);
-             i++;
-           }
-           value.pop();
-           value.push("1");
-           var f = "";
-           for (i = value.length-1; i >= 0; i--)
-           {
-             var v = value[i].toString();
-             final += v;
-           }
+    if (positive == false) {
+      var unsigned = parseInt(SignedDecimalInt.substring(1));
+    } else {
+      unsigned = parseInt(SignedDecimalInt);
+    }
+    var outputValue = "";
+    //converts to base2
+    while (unsigned != 0) {
+      var t = unsigned % 2;
+      outputValue = t + outputValue;
+      unsigned = Math.trunc(unsigned / 2);
+    }
+    while (outputValue.length < 7) {
+      outputValue += outputValue;
+    }
+    if (positive == false) {
+      outputValue = 1 + outputValue;
+    } else {
+      outputValue += outputValue;
+    }
 
-           value = final;
-         }
-         else{
-           while (t != 0)
-           {
-             value[i] = parseInt(t) % parseInt(2);
-             t = parseInt(t)/parseInt(2);
-             i++;
-           }
-           value.pop();
-           value.push("0");
-           //console.log (value);
-           var final = "";
-           for (i = value.length-1; i >= 0; i--)
-           {
-             var v = value[i].toString();
-             final += v;
-             //console.log (final);
-           }
-           value = final;
-         }
 
-         var outputValue = parseInt(value);
+    var l = outputValue.split("");
+    var o = "";
+    for(i = 0; i<l.length;i++){
+      if(l[i] == 0){
+        l[i] = 1;
+      }
+      else {
+        l[i] = 0;
+      }
+      o +=l[i];
+    }
 
-         compliment = "";
-         for (i = 0; i <= value.length-1; i++)
-         {
-           if (value[i] == '0')
-           {
-           var c = 1;
+    if(l[l.length-1]==0){
+      l[l.length-1] = 1;
+    } else{
+      a = l.length -1;
+      while(l[a]==1){
+        a--;
+      }
+      l[a]=1;
+      for(i=a+1;i<l.length;i++){
+        l[i]=0;
+      }
+    }
+    var o3;
+    for(i = 0; i<l.length;i++){
+      o3+=l[i];
+    }
+    
 
-           }
-           else
-           {
-             var c = 0;
-
-           }
-           compliment += c;
-         }
-
-         var addC = compliment.split('');
-         for (i = addC.length-1; i>= 0; i--)
-         {
-           if (addC[i] == '0')
-           {
-             addC [i] = "1";
-             break;
-           }
-           else
-           {
-             i++;
-           }
-         }
-
-         compliment = addC.join('');
-
-         var outputValueTwosComplement = parseInt(compliment);
 
     // Show the output on the screen
-    FormatAndShowOutput([outputValue, outputValueTwosComplement, SignedDecimalInt], 2);
+    FormatAndShowOutput([o3, o, SignedDecimalInt], 2);
 }

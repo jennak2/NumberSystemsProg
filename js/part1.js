@@ -1,51 +1,82 @@
 function ConversionPart1() {
 
-    var UnsignedInt = parseInt(document.getElementById("1_UnsignedInt").value);
+    var UnsignedInt = document.getElementById("1_UnsignedInt").value;
     var UnsignedIntBaseFrom = parseInt(document.getElementById("1_UnsignedIntBaseToConvertFrom").value);
     var UnsignedIntBaseTo = parseInt(document.getElementById("1_UnsignedIntBaseToConvertTo").value);
 
-    var outputValue;
+    var outputValue="";
+    var o = "";
 
-    if(UnsignedIntBaseFrom != 10){
-      v =0;
-      l = (UnsignedInt.toString()).length;
-      for(i =0;i<l;i++){
-        v = (v*UnsignedIntBaseFrom) + parseInt(UnsignedInt.toString().charAt(i));
+      var v =0;
+      l = UnsignedInt.split("");
+      for(i =0;i<l.length;i++){
+        var t = letter(l[i]);
+        v = (v*UnsignedIntBaseFrom) + t;
       }
-      outputValue = v;
+      o = v;
+
+    while (o != 0) {
+    var t2 = o % UnsignedIntBaseTo;
+    if (UnsignedIntBaseTo > 10){
+      t2 = letter2(temp2);
     }
-    else
-    {
-      outputValue = "";
-      var value = UnsignedInt;
-    //convert to base
-    while(value != 0)
-    {
-      var nextDigit = value % UnsignedIntBaseTo;
-      if(nextDigit >= 10){
-        if(nextDigit == 10)
-          nextDigit = "A";
-        else if(nextDigit == 11)
-          nextDigit = "B";
-        else if(nextDigit == 12)
-          nextDigit = "C";
-        else if(nextDigit == 13)
-          nextDigit = "D";
-        else if(nextDigit == 14)
-          nextDigit = "E";
-        else if(nextDigit == 15)
-          nextDigit = "F";
-      }
-      else{
-        nextDigit = nextDigit.toString();
-      }
-      outputValue = nextDigit + (outputValue.toString()).charAt(0);
-      value = Math.trunc(value / UnsignedIntBaseTo);
-    }
-    outputValue = parseInt(outputValue);
+    outputVal = temp2 + outputVal;
+    output = Math.trunc(output / UnsignedIntBaseTo);
+  }
+
+  FormatAndShowOutput([UnsignedInt, UnsignedIntBaseFrom, UnsignedIntBaseTo, outputValue], 1);
 }
+    function letter(expression){
+      switch (expression){
+        case "A":
+          return 10;
+          break;
+        case "B":
+          return 11;
+          break;
+        case "C":
+          return 12;
+          break;
+        case "D":
+          return 13;
+          break;
+        case "E":
+          return 14;
+          break;
+        case "F":
+          return 15;
+          break;
+        default:
+            return parseInt(expression);
+            break;
+
+  }
+}
+    function letter2(expression) {
+  switch (expression) {
+    case 10:
+      return "A";
+      break;
+    case 11:
+      return "B";
+      break;
+    case 12:
+      return "C";
+      break;
+    case 13:
+      return "D";
+      break;
+    case 14:
+      return "E";
+      break;
+    case 15:
+      return "F";
+      break;
+    default:
+      return parseInt(expression);
+      break;
+    }
+      }
+  
 
   // Show the output on the screen
-  FormatAndShowOutput([UnsignedInt, UnsignedIntBaseFrom, UnsignedIntBaseTo, outputValue], 1);
-
-}
