@@ -20,8 +20,8 @@ function ConversionPart1() {
     if (UnsignedIntBaseTo > 10){
       t2 = letter2(temp2);
     }
-    outputVal = temp2 + outputVal;
-    output = Math.trunc(output / UnsignedIntBaseTo);
+    outputVal = t2 + outputValue;
+    output = Math.trunc(o / UnsignedIntBaseTo);
   }
 
   FormatAndShowOutput([UnsignedInt, UnsignedIntBaseFrom, UnsignedIntBaseTo, outputValue], 1);
@@ -77,6 +77,6 @@ function ConversionPart1() {
       break;
     }
       }
-  
+
 
   // Show the output on the screen
