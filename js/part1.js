@@ -1,82 +1,47 @@
 function ConversionPart1() {
 
-    var UnsignedInt = document.getElementById("1_UnsignedInt").value;
-    var UnsignedIntBaseFrom = parseInt(document.getElementById("1_UnsignedIntBaseToConvertFrom").value);
-    var UnsignedIntBaseTo = parseInt(document.getElementById("1_UnsignedIntBaseToConvertTo").value);
-
-    var outputValue="";
-    var o = "";
-
-      var v =0;
-      l = UnsignedInt.split("");
-      for(i =0;i<l.length;i++){
-        var t = letter(l[i]);
-        v = (v*UnsignedIntBaseFrom) + t;
-      }
-      o = v;
-
-    while (o != 0) {
-    var t2 = o % UnsignedIntBaseTo;
-    if (UnsignedIntBaseTo > 10){
-      t2 = letter2(temp2);
+  var UnsignedInt = parseInt(document.getElementById("1_UnsignedInt").value);
+  var UnsignedIntBaseFrom = parseInt(document.getElementById("1_UnsignedIntBaseToConvertFrom").value);
+  var UnsignedIntBaseTo = parseInt(document.getElementById("1_UnsignedIntBaseToConvertTo").value);
+  var int;
+  var length = UnsignedInt.toString().length;
+    if(UnsignedIntBaseFrom != 10)
+  {
+    int = 0;
+    for(var i = 0; i < length; i++){
+      int2=Math.trunc(UnsignedInt/(Math.pow(10, length)));
+      length--;
+      int = int*UnsignedIntBaseFrom+int2;
+      UnsignedInt=UnsignedInt-int2;
     }
-    outputVal = t2 + outputValue;
-    output = Math.trunc(o / UnsignedIntBaseTo);
   }
-
-  FormatAndShowOutput([UnsignedInt, UnsignedIntBaseFrom, UnsignedIntBaseTo, outputValue], 1);
-}
-    function letter(expression){
-      switch (expression){
-        case "A":
-          return 10;
-          break;
-        case "B":
-          return 11;
-          break;
-        case "C":
-          return 12;
-          break;
-        case "D":
-          return 13;
-          break;
-        case "E":
-          return 14;
-          break;
-        case "F":
-          return 15;
-          break;
-        default:
-            return parseInt(expression);
-            break;
-
+  else{
+    int=UnsignedInt;
   }
-}
-    function letter2(expression) {
-  switch (expression) {
-    case 10:
-      return "A";
-      break;
-    case 11:
-      return "B";
-      break;
-    case 12:
-      return "C";
-      break;
-    case 13:
-      return "D";
-      break;
-    case 14:
-      return "E";
-      break;
-    case 15:
-      return "F";
-      break;
-    default:
-      return parseInt(expression);
-      break;
+  var output="";
+  while(int!=0)
+  {
+    var next=int%UnsignedIntBaseTo;
+    if(next >= 10){
+      if(next == 10)
+        next="A";
+      else if(next == 11)
+        next="B";
+      else if(next == 12)
+        next="C";
+      else if(next == 13)
+        next="D";
+      else if(next == 14)
+        next="E";
+      else if(next == 15)
+        next="F";
     }
-      }
-
-
+    else{
+      next=next.toString();
+    }
+    output=next+output.substring(0);
+    int=Math.trunc(int/UnsignedIntBaseTo);
+  }
+FormatAndShowOutput([UnsignedInt, UnsignedIntBaseFrom, UnsignedIntBaseTo, output], 1);
+}
   // Show the output on the screen
